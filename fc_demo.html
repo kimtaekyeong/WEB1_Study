@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>자바스크립트 함수의 호출</h1>
+  <script type="text/javascript">
+    //기본적인 함수 호출 방법
+    function func() {
+      document.write("테스트! <br />");
+    }
+    func();
+
+    //aplly 메소드 사용시!
+    //널값을 사용하는 apply는 가독성을 해치므로
+    //aplly의 첫번째인자값이 있는경우에만 사용을하자!
+    function sume(arg1, arg2) {
+      return arg1 + arg2;
+    }
+    document.write(sume(5, 2) + "<br />");
+    document.write(sume.apply(null, [5, 2]) + "<br />");
+
+
+
+    //========================================================
+
+    function sum() {
+      var _sum = 0;
+      for (name in this) {
+        if(typeof this[name] !== "function")
+        _sum += this[name];
+      }
+      return _sum;
+    }
+    o1 = {
+      val1: 1,
+      val2: 2,
+      val3: 3
+    }
+    o2 = {
+      v1: 10,
+      v2: 50,
+      v3: 100,
+      v4: 25
+    }
+    o3 = {
+      val1: 1,
+      val2: 2,
+      val3: 3,
+      sum: sum
+    }
+    o4 = {
+      v1: 10,
+      v2: 50,
+      v3: 100,
+      v4: 25,
+      sum: sum
+    }
+
+    //aplly를 사용함으로 다른객체의 소뮤물(this)인것처럼
+    //실행할 수 있다. 함수를 독립적인 객체로 사용하네
+    //객체내에서 함수를 넣는 방식은 자칫 코드가 복잡해진다
+    alert(sum.apply(o1)) // 6
+    alert(sum.apply(o2)) // 185
+    alert(o3.sum()) // 경고창에 6과 sum의 선언식이 포함된다..
+    alert(o4.sum()) // 경고창에 185와 sum의 선언식이 포함된다..
+  </script>
+</body>
+
+</html>
